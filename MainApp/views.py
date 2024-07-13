@@ -12,8 +12,17 @@ from .models import *
 # Create your views here.
 class HomePage(View):
     def get(self,request):
-        return render(request,'index.html')
+        
+        return render(request,'index.html',)
 
+class Jobs(LoginRequiredMixin,View):
+    def get(self,request):
+       
+        jobs = Job.objects.all()
+        context={
+                jobs:jobs
+            }
+        return render(request,'jobs.html',context)
 
 class Login(View):
     def get(self,request):
