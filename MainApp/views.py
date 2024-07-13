@@ -46,7 +46,6 @@ class Register(View):
                 return redirect('/register')
             except Exception as e:
                 new_user = User(username=username,password=password)
-                
                 try:
                     new_user.save()
                     if type == 'driver':

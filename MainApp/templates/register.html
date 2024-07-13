@@ -2,7 +2,12 @@
 <br />
 {% block content%} {% include 'navbar.html'%}
 
-<form class="max-w-sm mx-auto pt-32" method="POST" id="registerForm">
+<form
+  action="/register"
+  class="max-w-sm mx-auto pt-32"
+  method="POST"
+  id="registerForm"
+>
   {% csrf_token %} {% include 'messages.html'%}
   <div class="mb-5">
     <label
@@ -85,6 +90,14 @@
     Register new account
   </button>
 </form>
-
+<script>
+  document.querySelector("#registerForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    formData = new FormData(document.querySelector("#registerForm"));
+    formData.get("password") != formData.get("password1")
+      ? alert("Passwords don't match")
+      : document.querySelector("#registerForm").submit();
+  });
+</script>
 <div class="pt-20">&nbsp;</div>
 {% include 'footer.html'%} {% endblock %}
