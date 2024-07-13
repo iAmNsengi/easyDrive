@@ -1,7 +1,9 @@
-{% extends 'base.html'%} {% block content%} {% include 'navbar.html'%}
+{% extends 'base.html'%}
+<br />
+{% load static%} {% block content%} {% include 'navbar.html'%}
 <section class="bg-white dark:bg-gray-900">
   <div
-    class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12"
+    class="grid max-w-screen-xl px-4 py-12 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12"
   >
     <div class="mr-auto place-self-center lg:col-span-7">
       <h1
@@ -10,17 +12,16 @@
         Discover Your Ideal Driving Job in Rwanda
       </h1>
       <p
-        class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400"
+        class="max-w-2xl pt-10 pb-10 mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400"
       >
         Easy Drive is your ultimate solution for landing solution the perfect
         driving job in Rwanda. Don’t wait embark on your journey to success
         today with Easy Drive!
       </p>
-      <a
-        href="#"
-        class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900"
+      <button
+        class="ml-10 bg-blue-700 text-white flex hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-4 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
       >
-        Get started
+        Get Started
         <svg
           class="w-5 h-5 ml-2 -mr-1"
           fill="currentColor"
@@ -33,13 +34,10 @@
             clip-rule="evenodd"
           ></path>
         </svg>
-      </a>
+      </button>
     </div>
     <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
-      <img
-        src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/hero/phone-mockup.png"
-        alt="mockup"
-      />
+      <img src="{% static 'img/car1.png' %}" alt="mockup" />
     </div>
   </div>
 </section>
