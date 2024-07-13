@@ -59,3 +59,7 @@ class Register(View):
                 except Exception as e:
                     messages.error(request,e)
                     return redirect('/register')
+
+def Logout(request):
+    logout(request)
+    return redirect('/')
