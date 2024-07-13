@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Driver(models.Model):
     user = models.ForeignKey(User, on_delete=User)
-    avatar = models.ImageField(upload_to='driver/',null="True")
+    avatar = models.ImageField(upload_to='driver/',null="True",default='avatar.jpg')
     category = models.CharField(max_length=100,null="True")
     bio = models.TextField(null="True")
     created_at = models.DateTimeField(auto_now_add=True)
@@ -17,7 +17,7 @@ class Driver(models.Model):
 
 class Company(models.Model):
     user = models.ForeignKey(User, on_delete=User)
-    avatar = models.ImageField(upload_to='company/',null="True")
+    avatar = models.ImageField(upload_to='company/',null="True",default='avatar.jpg')
     bio = models.TextField(null="True")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
