@@ -28,3 +28,15 @@ class Login(View):
             else:
                 messages.error(request,'User not found!')
                 return render(request, 'login.html')
+
+class Register(View):
+    def get(self,request):
+        return render(request,'register.html')
+    
+    def post(self,request):
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            password1 = request.POST.get('password1')
+
+           
