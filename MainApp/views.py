@@ -45,7 +45,7 @@ class Register(View):
                 messages.error(request, 'User already exists, Try logging in!')
                 return redirect('/register')
             except Exception as e:
-                new_user = User(username=username,password=password)
+                new_user =  User.objects.create_user(username = username, password=password)
                 try:
                     new_user.save()
                     if type == 'driver':

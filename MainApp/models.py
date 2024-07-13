@@ -11,9 +11,6 @@ class Driver(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 
-    def __str__(self) -> str:
-        return self.user.username + " " + self.category
-
 
 class Company(models.Model):
     user = models.ForeignKey(User, on_delete=User)
