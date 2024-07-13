@@ -127,7 +127,8 @@
     >
       Want to know more about us? Let us know.
     </p>
-    <form action="#" class="space-y-8">
+    <form class="space-y-8" method="POST">
+      {% include 'messages.html'%} {% csrf_token %}
       <div>
         <label
           for="email"

@@ -1,7 +1,8 @@
 {% extends 'base.html' %} {% load static %}
 <br />
 {% block content%} {% include 'navbar.html'%}
-<form class="max-w-sm mx-auto pt-32">
+<form class="max-w-sm mx-auto pt-32" method="POST">
+  {% csrf_token %} {% include 'messages.html'%}
   <div class="mb-5">
     <label
       for="email"
@@ -49,5 +50,5 @@
     Login
   </button>
 </form>
-<div class="pt-20">&nbsp;</div>
+<div class="pt-36">&nbsp;</div>
 {% include 'footer.html'%} {% endblock %}

@@ -5,6 +5,8 @@ from django.contrib.auth import login,logout,authenticate
 from urllib.parse import urlparse, parse_qs
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.contrib.auth.models import User
+from .models import *
 
 
 # Create your views here.
@@ -37,6 +39,24 @@ class Register(View):
         if request.method == 'POST':
             username = request.POST.get('username')
             password = request.POST.get('password')
-            password1 = request.POST.get('password1')
-
-           
+            type = request.POST.get('type')
+            try:
+                User.objects.get(username = username)
+                messages.error(request, 'User already exists, Try logging in!')
+                return redirect('/register')
+            except Exception as e:
+                new_user = User(username=username,password=password)
+                
+                try:
+                    new_user.save()
+                    if type == 'driver':
+                        new_driver = Driver(user = User.objects.get(username=username))
+                        new_driver.save()
+                    if type == 'company':
+                        new_company = Company(user = User.objects.get(username=username))
+                        new_company.save()
+                    messages.success(request,'Profile created successfully!')
+                    return redirect('/login')
+                except Exception as e:
+                    messages.error(request,e)
+                    return redirect('/register')

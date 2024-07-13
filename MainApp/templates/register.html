@@ -2,7 +2,8 @@
 <br />
 {% block content%} {% include 'navbar.html'%}
 
-<form class="max-w-sm mx-auto pt-32">
+<form class="max-w-sm mx-auto pt-32" method="POST" id="registerForm">
+  {% csrf_token %} {% include 'messages.html'%}
   <div class="mb-5">
     <label
       for="countries"
@@ -10,11 +11,11 @@
       >Register as</label
     >
     <select
-      id="countries"
+      name="type"
       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
     >
-      <option>Driver</option>
-      <option>Company</option>
+      <option value="driver">Driver</option>
+      <option value="company">Company</option>
     </select>
   </div>
   <div class="mb-5">
@@ -84,5 +85,6 @@
     Register new account
   </button>
 </form>
+
 <div class="pt-20">&nbsp;</div>
 {% include 'footer.html'%} {% endblock %}

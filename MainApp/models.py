@@ -5,8 +5,8 @@ from django.contrib.auth.models import User
 class Driver(models.Model):
     user = models.ForeignKey(User, on_delete=User)
     avatar = models.ImageField(upload_to='driver/',null="True")
-    category = models.CharField(max_length=100)
-    bio = models.TextField()
+    category = models.CharField(max_length=100,null="True")
+    bio = models.TextField(null="True")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -17,8 +17,8 @@ class Driver(models.Model):
 
 class Company(models.Model):
     user = models.ForeignKey(User, on_delete=User)
-    avatar = models.ImageField(upload_to='company/')
-    bio = models.TextField()
+    avatar = models.ImageField(upload_to='company/',null="True")
+    bio = models.TextField(null="True")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
