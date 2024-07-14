@@ -17,10 +17,9 @@ class HomePage(View):
 
 class Jobs(LoginRequiredMixin,View):
     def get(self,request):
-       
-        jobs = Job.objects.all()
+        jobs = Job.objects.filter(status = 'open').all()
         context={
-                jobs:jobs
+                'jobs':jobs
             }
         return render(request,'jobs.html',context)
 

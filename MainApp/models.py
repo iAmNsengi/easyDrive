@@ -20,6 +20,7 @@ class Driver(models.Model):
     license_number = models.CharField(max_length=50, null=True, blank=True)
     license_type = models.CharField(max_length=50, null=True, blank=True)
     license_expiration = models.DateField(null=True, blank=True)
+    salary = models.DecimalField(max_digits=10, decimal_places=2,default=0.0)
     rating = models.FloatField(default=0)  # Average rating
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
