@@ -56,6 +56,17 @@ class Job(models.Model):
         (CLOSED, 'Closed'),
     ]
 
+    FULLTIME = 'full-time'
+    PARTTIME = 'part-time'
+    CONTRACT = 'contract'
+
+    TYPE_CHOICES = [
+        (FULLTIME, 'full-time'),
+        (PARTTIME, 'part-time'),
+        (CONTRACT, 'contract'),
+
+    ]
+
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=255, default="")
     location = models.CharField(max_length=255, default="")
@@ -63,6 +74,7 @@ class Job(models.Model):
     description = models.TextField()
     requirements = models.TextField(null=True, blank=True)
     applicants = models.IntegerField(default=0)
+    type = models.CharField(max_length=10, choices=TYPE_CHOICES, default=FULLTIME)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default=OPEN)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

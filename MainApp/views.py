@@ -26,6 +26,17 @@ class Jobs(LoginRequiredMixin,View):
 class AddJob(LoginRequiredMixin,View):
     def get(self,request):
         return render(request, 'add_job.html')
+    
+    def post(self,request):
+        title = request.POST.get('title')
+        job_type = request.POST.get('job-type')
+        location = request.POST.get('location')
+        description = request.POST.get('description')
+        requirements = request.POST.get('requirements')
+
+        
+
+
 
 
 class Login(View):

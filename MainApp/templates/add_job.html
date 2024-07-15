@@ -4,7 +4,9 @@
 
 <div class="w-full max-w-xl mx-auto">
   <form action="" method="post">
-    <h1 class="text-2xl mb-2 text-gray-700 dark:text-gray-300">Post new job</h1>
+    <h1 class="text-2xl mb-2 text-gray-700 dark:text-gray-300 py-12">
+      Post new job
+    </h1>
 
     <div
       class="job-info border-b-2 border-gray-300 dark:border-gray-700 py-2 mb-5"
@@ -20,25 +22,10 @@
           class="appearance-none block w-full bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-400 dark:border-gray-600 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500 dark:focus:border-gray-400"
           type="text"
           id="job-title"
-          name="job-title"
-          placeholder="Frontend Developer"
+          name="title"
+          placeholder="Driver..."
           autofocus
-        />
-      </div>
-
-      <!--     Link to apply     -->
-      <div class="mb-4">
-        <label
-          class="block text-gray-700 dark:text-gray-300 text-sm mb-2"
-          for="apply-link"
-          >Link to apply</label
-        >
-        <input
-          class="appearance-none block w-full bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-400 dark:border-gray-600 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500 dark:focus:border-gray-400"
-          type="url"
-          id="apply-link"
-          name="apply-link"
-          placeholder="https://www.djangoproject.com/apply"
+          required
         />
       </div>
 
@@ -55,11 +42,11 @@
               class="block appearance-none w-full bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-600 text-gray-700 dark:text-gray-300 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:border-gray-500 dark:focus:border-gray-400"
               id="job-type"
               name="job-type"
+              required
             >
-              <option>Full-time</option>
-              <option>Part-time</option>
-              <option>Freelance</option>
-              <option>Contract</option>
+              <option value="full-time">Full-time</option>
+              <option value="part-time">Part-time</option>
+              <option value="contract">Contract</option>
             </select>
             <div
               class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700 dark:text-gray-300"
@@ -89,17 +76,9 @@
             class="appearance-none block w-full bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-400 dark:border-gray-600 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500 dark:focus:border-gray-400"
             id="location"
             name="location"
-            placeholder="Schwerin"
+            placeholder="Kigali..."
+            required
           />
-          <div>
-            <label
-              class="text-gray-600 dark:text-gray-400 flex items-center"
-              for="remote"
-            >
-              <input class="mr-2 leading-tight" type="checkbox" id="remote" />
-              <span class="text-sm">Work can be done remotely</span>
-            </label>
-          </div>
         </div>
       </div>
       <!-- end group -->
@@ -117,81 +96,110 @@
           id="description"
           cols=""
           rows=""
+          required
         ></textarea>
       </div>
 
-      <div class="flex flex-wrap -mx-3">
-        <!--     Company       -->
-        <div class="w-full md:w-1/2 px-3 mb-4 md:mb-0">
-          <label
-            for="company"
-            class="block text-gray-700 dark:text-gray-300 text-sm mb-2"
-            >Company</label
-          >
-          <input
-            type="text"
-            class="appearance-none block w-full bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-400 dark:border-gray-600 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500 dark:focus:border-gray-400"
-            id="company"
-            name="company"
-            placeholder="Company"
-          />
-        </div>
-
-        <!--      Company Website      -->
-        <div class="w-full md:w-1/2 px-3 mb-4 md:mb-0">
-          <label
-            for="company-website"
-            class="block text-gray-700 dark:text-gray-300 text-sm mb-2"
-            >Company Website</label
-          >
-          <input
-            type="url"
-            class="appearance-none block w-full bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-400 dark:border-gray-600 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500 dark:focus:border-gray-400"
-            id="company-website"
-            name="company-website"
-            placeholder="https://www.djangoproject.com/"
-          />
-        </div>
-      </div>
-      <!-- end group -->
-
-      <!--      Company Logo      -->
-      <div class="mb-4 md:mb-0">
+      <!--    Requirements      -->
+      <div>
         <label
-          for="company-logo"
+          for="requirements"
           class="block text-gray-700 dark:text-gray-300 text-sm mb-2"
-          >Logo Image</label
+          >Requirements</label
         >
-        <input
-          type="file"
-          class="appearance-none block w-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-600 rounded py-3 px-3 mb-3 leading-tight focus:outline-none focus:bg-white dark:focus:bg-gray-800 focus:border-gray-500 dark:focus:border-gray-400"
-          id="company-logo"
-          name="company-logo"
-        />
+        <textarea
+          class="appearance-none block w-full bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-400 dark:border-gray-600 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:border-gray-500 dark:focus:border-gray-400"
+          name="requirements"
+          id="requirements"
+          cols=""
+          rows=""
+          required
+        ></textarea>
       </div>
-    </div>
-    <!-- end job-info -->
 
-    <div class="payment mb-6">
-      <h4 class="mb-2 text-gray-700 dark:text-gray-300">Payment</h4>
-      <p
-        class="bg-gray-200 dark:bg-gray-700 py-3 text-center text-sm text-gray-700 dark:text-gray-300"
-      >
-        <span><i class="far fa-credit-card"></i></span>
-        All jobs cost <strong>€300</strong> for 30 days.
-      </p>
-    </div>
-
-    <!--     Submit     -->
-    <div>
-      <button
-        class="bg-teal-500 hover:bg-teal-600 text-white py-2 px-3 rounded"
-        type="submit"
-      >
-        Create job
-      </button>
+      <div>
+        <button
+          class="bg-teal-500 hover:bg-teal-600 text-white py-2 px-3 rounded"
+          type="submit"
+        >
+          Create job
+        </button>
+      </div>
     </div>
   </form>
 </div>
+<div class="pt-20">&nbsp;</div>
+{% include 'footer.html' %}
+<!-- Include SimpleMDE JS -->
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+<style>
+  .editor-dark .CodeMirror,
+  .editor-dark .CodeMirror-scroll {
+    background-color: #2d3748 !important;
+    color: #cbd5e0 !important;
+  }
 
+  .editor-dark .CodeMirror-gutters {
+    background-color: #2d3748 !important;
+    border-right: 1px solid #4a5568 !important;
+  }
+
+  .editor-dark .editor-toolbar {
+    background-color: #2d3748 !important;
+    border-bottom: 1px solid #4a5568 !important;
+  }
+
+  .editor-dark .editor-toolbar button {
+    color: #cbd5e0 !important;
+  }
+
+  .editor-dark .editor-statusbar {
+    background-color: #2d3748 !important;
+    border-top: 1px solid #4a5568 !important;
+  }
+</style>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    let simpleMde = new SimpleMDE({
+      element: document.getElementById("description"),
+    });
+    let simpleMde2 = new SimpleMDE({
+      element: document.getElementById("requirements"),
+    });
+
+    function applyTheme(theme) {
+      if (theme === "dark") {
+        simpleMde.codemirror.getWrapperElement().classList.add("editor-dark");
+        simpleMde2.codemirror.getWrapperElement().classList.add("editor-dark");
+      } else {
+        simpleMde.codemirror
+          .getWrapperElement()
+          .classList.remove("editor-dark");
+        simpleMde2.codemirror
+          .getWrapperElement()
+          .classList.remove("editor-dark");
+      }
+    }
+
+    const theme = document.documentElement.classList.contains("dark")
+      ? "dark"
+      : "light";
+    applyTheme(theme);
+
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === "class") {
+          const theme = document.documentElement.classList.contains("dark")
+            ? "dark"
+            : "light";
+          applyTheme(theme);
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+    });
+  });
+</script>
 {% endblock %}
