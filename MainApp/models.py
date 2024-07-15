@@ -70,7 +70,7 @@ class Job(models.Model):
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=255, default="")
     location = models.CharField(max_length=255, default="")
-    salary = models.DecimalField(max_digits=10, decimal_places=2,default=0.0)
+    # salary = models.DecimalField(max_digits=10, decimal_places=2,default=0.0)
     description = models.TextField()
     requirements = models.TextField(null=True, blank=True)
     applicants = models.IntegerField(default=0)
