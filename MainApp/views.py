@@ -22,6 +22,11 @@ class Jobs(LoginRequiredMixin,View):
                 'jobs':jobs
             }
         return render(request,'jobs.html',context)
+    
+class AddJob(LoginRequiredMixin,View):
+    def get(self,request):
+        return render(request, 'add_job.html')
+
 
 class Login(View):
     def get(self,request):
