@@ -15,7 +15,7 @@
         today with Easy Drive!
       </p>
     </div>
-    <div class="grid gap-8 lg:grid-cols-2">
+    <div class="grid gap-8 lg:grid-cols-3">
       {% for job in jobs %}
       <article
         class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700"
@@ -66,6 +66,10 @@
               {{job.status|upper}}
             </span>
             {% endif %}
+            <span
+              class="inline-flex items-center bg-yellow-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-yellow-900 dark:text-yellow-300"
+              >({{job.applicants}}) Applied
+            </span>
           </div>
           <button
             href="#"

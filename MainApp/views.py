@@ -34,7 +34,11 @@ class Login(View):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('/')
+                next_url = request.POST.get('next', request.GET.get('next', '/'))
+                netloc = urlparse(next_url).netloc
+                if netloc: 
+                    next_url = '/'  
+                return redirect(next_url)
             else:
                 messages.error(request,'User not found!')
                 return render(request, 'login.html')
