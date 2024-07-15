@@ -37,7 +37,8 @@ class AddJob(LoginRequiredMixin,View):
         try:
             new_job = Job(creator = User.objects.get(username = request.user), title =title,location=location,description=description,requirements=requirements,type=job_type )
             new_job.save()
-            messages.success(request,'Application exists')
+            messages.success(request,'Job added successfully!')
+            return redirect('/add_job')
         
         except Exception as e:
             messages.error(request,e)
