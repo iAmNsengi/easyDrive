@@ -59,7 +59,15 @@ class JobDetail(LoginRequiredMixin,View):
             
         return render(request,'job_detail.html',context)
 
-    def post(self ,request):
+    def post(self ,request,id):
+        if request.method == 'POST':
+            try:
+                applicant_obj = User.objects.get(username=request.user) 
+                driver_obj = Driver.objects.get(user = applicant_obj)
+            except Exception as e:
+                messages.error(request,e)
+                return redirect(f'/jobs/{id}')
+
         return redirect(f'/job/{id}')
 
 
