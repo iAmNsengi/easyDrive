@@ -90,6 +90,7 @@ class Application(models.Model):
     driver = models.ForeignKey(Driver, on_delete=models.CASCADE)
     application_date = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=20, default='pending')
+    motivation_letter = models.TextField(default="")
 
     def __str__(self):
         return f'{self.driver.user.username} - {self.job.title}'

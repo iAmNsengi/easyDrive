@@ -2,12 +2,7 @@
 <br />
 {% block content%} {% include 'navbar.html'%}
 
-<form
-  action="/register"
-  class="max-w-sm mx-auto pt-32"
-  method="POST"
-  id="registerForm"
->
+<form class="max-w-sm mx-auto pt-32" method="POST" id="registerForm">
   {% csrf_token %} {% include 'messages.html'%}
   <div class="mb-5">
     <label

@@ -61,12 +61,24 @@ class JobDetail(LoginRequiredMixin,View):
 
     def post(self ,request,id):
         if request.method == 'POST':
+            letter = request.POST.get('letter')
             try:
                 applicant_obj = User.objects.get(username=request.user) 
                 driver_obj = Driver.objects.get(user = applicant_obj)
+                job_obj = Job.objects.get(id=id)
+
+                application_exist = Application.objects.filter(job = job_obj, driver=driver_obj).first()
+                if application_exist:
+                    messages.error(request,'Application exists')
+                    return redirect(f'/job/{id}')
+
+                new_application = Application(job=job_obj,driver=driver_obj,motivation_letter=letter)
+                new_application.save()
+                job_obj.applicants = job_obj.applicants + 1
+                job_obj.save()
             except Exception as e:
                 messages.error(request,e)
-                return redirect(f'/jobs/{id}')
+                return redirect(f'/job/{id}')
 
         return redirect(f'/job/{id}')
 
