@@ -1,0 +1,237 @@
+{% extends 'base.html'%} {% block content%} &nbsp; {% include "./navbar.html" %}
+<div class="bg-gray-100 dark:bg-gray-900">
+  <div class="container mx-auto my-5 p-5">
+    <div class="md:flex no-wrap md:-mx-2">
+      <!-- Personal Information Section -->
+      <div class="w-full md:w-3/12 md:mx-2">
+        <div class="bg-white dark:bg-gray-800 p-3 border-t-4 border-green-400">
+          <div class="image overflow-hidden">
+            <img
+              class="h-auto w-48 mx-auto rounded-full"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtbEsykx-0fhTred6UwHDYtMFd2UgTJCG4gaklT1dx4suRO4_n5LJr4Gg28kquSX5fpNo&usqp=CAU"
+              alt="Profile Picture"
+            />
+          </div>
+          <h1
+            class="text-gray-900 dark:text-gray-100 font-bold text-xl leading-8 my-1"
+          >
+            Jyoti
+          </h1>
+          <h3
+            class="text-gray-600 dark:text-gray-300 font-lg text-semibold leading-6"
+          >
+            +91 7493658737
+          </h3>
+          <p
+            class="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 leading-6"
+          >
+            Delhi, NCR
+          </p>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="w-full md:w-9/12 mx-2 h-64">
+        <!-- Personal Information Form -->
+        <div class="bg-white dark:bg-gray-800 p-3 shadow-sm rounded-sm">
+          <div
+            class="flex items-center space-x-2 font-semibold text-gray-900 dark:text-gray-100 leading-8"
+          >
+            <span class="tracking-wide">Personal Information</span>
+          </div>
+          <form>
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <label
+                  class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >Avatar</label
+                >
+                <input
+                  type="file"
+                  class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                />
+              </div>
+              <div>
+                <label
+                  class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >Category</label
+                >
+                <input
+                  type="text"
+                  class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                />
+              </div>
+              <div>
+                <label
+                  class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >Bio</label
+                >
+                <textarea
+                  class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                ></textarea>
+              </div>
+              <div>
+                <label
+                  class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >Status</label
+                >
+                <select
+                  class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                >
+                  <option value="AVAILABLE">Available</option>
+                  <option value="UNAVAILABLE">Unavailable</option>
+                </select>
+              </div>
+              <div>
+                <label
+                  class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >Experience (years)</label
+                >
+                <input
+                  type="number"
+                  class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                />
+              </div>
+              <div>
+                <label
+                  class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >License Number</label
+                >
+                <input
+                  type="text"
+                  class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                />
+              </div>
+              <div>
+                <label
+                  class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >License Type</label
+                >
+                <input
+                  type="text"
+                  class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                />
+              </div>
+              <div>
+                <label
+                  class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >License Expiration</label
+                >
+                <input
+                  type="date"
+                  class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                />
+              </div>
+              <div>
+                <label
+                  class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >Salary</label
+                >
+                <input
+                  type="number"
+                  step="0.01"
+                  class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                />
+              </div>
+              <div>
+                <label
+                  class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >Rating</label
+                >
+                <input
+                  type="number"
+                  step="0.1"
+                  class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                />
+              </div>
+            </div>
+            <button
+              type="submit"
+              class="mt-4 px-4 py-2 bg-green-500 text-white rounded-md"
+            >
+              Save
+            </button>
+          </form>
+        </div>
+
+        <!-- Job Applications Table -->
+        <div class="bg-white dark:bg-gray-800 p-3 shadow-sm rounded-sm mt-6">
+          <div
+            class="flex items-center space-x-2 font-semibold text-gray-900 dark:text-gray-100 leading-8"
+          >
+            <span class="tracking-wide">Job Applications</span>
+          </div>
+          <div class="overflow-x-auto mt-2">
+            <table
+              class="min-w-full divide-y divide-gray-200 dark:divide-gray-700"
+            >
+              <thead class="bg-gray-50 dark:bg-gray-700">
+                <tr>
+                  <th
+                    class="px-6 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+                  >
+                    Company
+                  </th>
+                  <th
+                    class="px-6 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+                  >
+                    Position
+                  </th>
+                  <th
+                    class="px-6 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
+                  >
+                    Status
+                  </th>
+                </tr>
+              </thead>
+              <tbody
+                class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700"
+              >
+                <tr>
+                  <td
+                    class="px-6 py-4 whitespace-nowrap text-gray-900 dark:text-gray-100"
+                  >
+                    Company A
+                  </td>
+                  <td
+                    class="px-6 py-4 whitespace-nowrap text-gray-900 dark:text-gray-100"
+                  >
+                    Software Engineer
+                  </td>
+                  <td
+                    class="px-6 py-4 whitespace-nowrap text-gray-900 dark:text-gray-100"
+                  >
+                    Pending
+                  </td>
+                </tr>
+                <tr>
+                  <td
+                    class="px-6 py-4 whitespace-nowrap text-gray-900 dark:text-gray-100"
+                  >
+                    Company B
+                  </td>
+                  <td
+                    class="px-6 py-4 whitespace-nowrap text-gray-900 dark:text-gray-100"
+                  >
+                    Frontend Developer
+                  </td>
+                  <td
+                    class="px-6 py-4 whitespace-nowrap text-gray-900 dark:text-gray-100"
+                  >
+                    Interview
+                  </td>
+                </tr>
+                <!-- Add more job applications as needed -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Flowbite JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+</div>
+
+{% endblock%}

@@ -68,6 +68,7 @@ class JobDetail(LoginRequiredMixin,View):
                 job_obj = Job.objects.get(id=id)
 
                 application_exist = Application.objects.filter(job = job_obj, driver=driver_obj).first()
+
                 if application_exist:
                     messages.error(request,'Application exists')
                     return redirect(f'/job/{id}')
@@ -76,12 +77,17 @@ class JobDetail(LoginRequiredMixin,View):
                 new_application.save()
                 job_obj.applicants = job_obj.applicants + 1
                 job_obj.save()
+                messages.success(request,"Application sent successfully!")
             except Exception as e:
                 messages.error(request,e)
                 return redirect(f'/job/{id}')
 
         return redirect(f'/job/{id}')
 
+
+class DriverProfile(LoginRequiredMixin,View):
+    def get(self,request):
+        return render(request,'driver_profile.html')
 
 class Login(View):
     def get(self,request):
