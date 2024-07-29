@@ -45,9 +45,19 @@ class AddJob(LoginRequiredMixin,View):
             return redirect('/add_job')
 
 
-class Job(LoginRequiredMixin,View):
-    def get(self, request):
-        return render(request,'job_detail.html')
+class JobDetail(LoginRequiredMixin,View):
+    def get(self, request,id):
+        context = {}
+        try:
+            job = Job.objects.get(id=id)
+            context = {
+                'job':job
+            }
+        except Exception as e:
+            messages.error(request,e)
+            return redirect('/jobs')
+            
+        return render(request,'job_detail.html',context)
 
     def post(self ,request):
         return redirect(f'/job/{id}')
