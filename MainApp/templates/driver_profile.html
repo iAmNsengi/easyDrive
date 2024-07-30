@@ -1,4 +1,6 @@
-{% extends 'base.html'%} {% block content%} &nbsp; {% include "./navbar.html" %}
+{% extends 'base.html' %} {% block content %}
+<br />
+{% include "./navbar.html"%}
 <div class="bg-gray-100 dark:bg-gray-900">
   <div class="container mx-auto my-5 p-5">
     <div class="md:flex no-wrap md:-mx-2">
@@ -15,17 +17,17 @@
           <h1
             class="text-gray-900 dark:text-gray-100 font-bold text-xl leading-8 my-1"
           >
-            Jyoti
+            {{ request.user.first_name }} {{ request.user.last_name }}
           </h1>
           <h3
             class="text-gray-600 dark:text-gray-300 font-lg text-semibold leading-6"
           >
-            +91 7493658737
+            {{ request.user.email }}
           </h3>
           <p
             class="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 leading-6"
           >
-            Delhi, NCR
+            address
           </p>
         </div>
       </div>
@@ -39,8 +41,45 @@
           >
             <span class="tracking-wide">Personal Information</span>
           </div>
-          <form>
+          <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
             <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <label
+                  class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >First Name</label
+                >
+                <input
+                  type="text"
+                  name="first_name"
+                  value="{{ request.user.first_name }}"
+                  class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                />
+              </div>
+              <div>
+                <label
+                  class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >Last Name</label
+                >
+                <input
+                  type="text"
+                  name="last_name"
+                  value="{{ request.user.last_name }}"
+                  class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                />
+              </div>
+              <div>
+                <label
+                  class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >Email</label
+                >
+                <input
+                  type="email"
+                  name="email"
+                  value="{{ request.user.email }}"
+                  class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                />
+              </div>
               <div>
                 <label
                   class="block text-sm font-medium text-gray-700 dark:text-gray-300"
@@ -48,6 +87,7 @@
                 >
                 <input
                   type="file"
+                  name="avatar"
                   class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                 />
               </div>
@@ -58,6 +98,7 @@
                 >
                 <input
                   type="text"
+                  name="category"
                   class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                 />
               </div>
@@ -67,6 +108,7 @@
                   >Bio</label
                 >
                 <textarea
+                  name="bio"
                   class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                 ></textarea>
               </div>
@@ -76,6 +118,7 @@
                   >Status</label
                 >
                 <select
+                  name="status"
                   class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                 >
                   <option value="AVAILABLE">Available</option>
@@ -89,6 +132,7 @@
                 >
                 <input
                   type="number"
+                  name="experience_years"
                   class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                 />
               </div>
@@ -99,6 +143,7 @@
                 >
                 <input
                   type="text"
+                  name="license_number"
                   class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                 />
               </div>
@@ -109,6 +154,7 @@
                 >
                 <input
                   type="text"
+                  name="license_type"
                   class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                 />
               </div>
@@ -119,6 +165,7 @@
                 >
                 <input
                   type="date"
+                  name="license_expiration"
                   class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                 />
               </div>
@@ -130,6 +177,7 @@
                 <input
                   type="number"
                   step="0.01"
+                  name="salary"
                   class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                 />
               </div>
@@ -141,6 +189,7 @@
                 <input
                   type="number"
                   step="0.1"
+                  name="rating"
                   class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
                 />
               </div>
@@ -233,5 +282,4 @@
   <!-- Flowbite JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
 </div>
-
-{% endblock%}
+{% endblock %}
