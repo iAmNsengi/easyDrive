@@ -7,6 +7,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
 from .models import *
+from django.core.exceptions import ValidationError
+from django.utils.dateparse import parse_date
 
 
 # Create your views here.
@@ -85,6 +87,7 @@ class JobDetail(LoginRequiredMixin,View):
         return redirect(f'/job/{id}')
 
 
+
 class ProfileView(LoginRequiredMixin, View):
     def get(self, request):
         user = request.user
@@ -114,7 +117,14 @@ class ProfileView(LoginRequiredMixin, View):
             driver_profile.experience_years = request.POST.get('experience_years')
             driver_profile.license_number = request.POST.get('license_number')
             driver_profile.license_type = request.POST.get('license_type')
-            driver_profile.license_expiration = request.POST.get('license_expiration')
+            
+            license_expiration = request.POST.get('license_expiration')
+            if license_expiration:
+                try:
+                    driver_profile.license_expiration = parse_date(license_expiration)
+                except ValidationError:
+                    driver_profile.license_expiration = None
+
             driver_profile.salary = request.POST.get('salary')
             driver_profile.rating = request.POST.get('rating')
             driver_profile.save()
@@ -129,7 +139,7 @@ class ProfileView(LoginRequiredMixin, View):
                 company_profile.contact_phone = request.POST.get('contact_phone')
                 company_profile.save()
 
-        return redirect('profile')
+        return redirect('/profile')
 
 class Login(View):
     def get(self,request):

@@ -11,7 +11,11 @@
           <div class="image overflow-hidden">
             <img
               class="h-auto w-48 mx-auto rounded-full"
-              src="{% if driver_profile %}{{ driver_profile.avatar.url }}{% else %}{{ company_profile.avatar.url }}{% endif %}"
+              src='{% if driver_profile %}
+              {{ driver_profile.avatar.url }}
+              {% else %}
+              {{ company_profile.avatar.url }}
+              {% endif %}'
               alt="Profile Picture"
             />
           </div>
