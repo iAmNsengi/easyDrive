@@ -87,50 +87,59 @@ class JobDetail(LoginRequiredMixin,View):
         return redirect(f'/job/{id}')
 
 
-
 class ProfileView(LoginRequiredMixin, View):
     def get(self, request):
+        context ={}
         user = request.user
         driver_profile = Driver.objects.filter(user=user).first()
         company_profile = Company.objects.filter(user=user).first()
         
-        context = {
-            'driver_profile': driver_profile,
-            'company_profile': company_profile
-        }
+        if driver_profile:
+            # Jobs applied to by this driver
+            applications = Application.objects.filter(driver=driver_profile)
+            context = {
+                'driver_profile': driver_profile,
+                'applications': applications,
+            }
+        elif company_profile:
+            # Jobs created by this company
+            jobs_created = Job.objects.filter(creator=user)
+            context = {
+                'company_profile': company_profile,
+                'jobs_created': jobs_created,
+            }
+        
         return render(request, 'profile.html', context)
 
     def post(self, request):
         user = request.user
-
         user.first_name = request.POST.get('first_name')
         user.last_name = request.POST.get('last_name')
         user.email = request.POST.get('email')
         user.save()
-        
-        driver_profile = Driver.objects.filter(user=user).first()
-        if driver_profile:
-            driver_profile.avatar = request.FILES.get('avatar', driver_profile.avatar)
-            driver_profile.category = request.POST.get('category')
-            driver_profile.bio = request.POST.get('bio')
-            driver_profile.status = request.POST.get('status')
-            driver_profile.experience_years = request.POST.get('experience_years')
-            driver_profile.license_number = request.POST.get('license_number')
-            driver_profile.license_type = request.POST.get('license_type')
-            
-            license_expiration = request.POST.get('license_expiration')
-            if license_expiration:
-                try:
-                    driver_profile.license_expiration = parse_date(license_expiration)
-                except ValidationError:
-                    driver_profile.license_expiration = None
 
-            driver_profile.salary = request.POST.get('salary')
-            driver_profile.rating = request.POST.get('rating')
-            driver_profile.save()
+        if Driver.objects.filter(user=user).exists():
+            try:
+
+                driver_profile = Driver.objects.get(user=user)
+                driver_profile.avatar = request.FILES.get('avatar', driver_profile.avatar)
+                driver_profile.category = request.POST.get('category')
+                driver_profile.bio = request.POST.get('bio')
+                driver_profile.status = request.POST.get('status')
+                driver_profile.experience = request.POST.get('experience_years') or 0
+                driver_profile.license_number = request.POST.get('license_number')
+                driver_profile.license_type = request.POST.get('license_type')
+                driver_profile.license_expiration = request.POST.get('license_expiration') or None
+                driver_profile.salary = request.POST.get('salary') or 0
+                driver_profile.rating = request.POST.get('rating') or 0
+                driver_profile.save()
+                messages.success(request,'Updated successfully')
+            except Exception as e:
+                messages.error(request,e)
+                return redirect('/profile')
         else:
-            company_profile = Company.objects.filter(user=user).first()
-            if company_profile:
+            try:
+                company_profile = Company.objects.get(user=user)
                 company_profile.avatar = request.FILES.get('avatar', company_profile.avatar)
                 company_profile.name = request.POST.get('name')
                 company_profile.location = request.POST.get('location')
@@ -138,8 +147,13 @@ class ProfileView(LoginRequiredMixin, View):
                 company_profile.contact_email = request.POST.get('contact_email')
                 company_profile.contact_phone = request.POST.get('contact_phone')
                 company_profile.save()
+                messages.success(request,'Updated successfully')
+            except Exception as e:
+                messages.error(request,e)
+                return redirect('/profile')
 
         return redirect('/profile')
+
 
 class Login(View):
     def get(self,request):

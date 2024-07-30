@@ -2,6 +2,8 @@
 {% block content %}
 &nbsp;
 {% include "./navbar.html" %}
+{% include 'messages.html'%}
+
 <div class="bg-gray-100 dark:bg-gray-900">
   <div class="container mx-auto my-5 p-5">
     <div class="md:flex no-wrap md:-mx-2">
@@ -11,11 +13,7 @@
           <div class="image overflow-hidden">
             <img
               class="h-auto w-48 mx-auto rounded-full"
-              src='{% if driver_profile %}
-              {{ driver_profile.avatar.url }}
-              {% else %}
-              {{ company_profile.avatar.url }}
-              {% endif %}'
+              src="{% if driver_profile %}{{ driver_profile.avatar.url }}{% else %}{{ company_profile.avatar.url }}{% endif %}"
               alt="Profile Picture"
             />
           </div>
@@ -31,7 +29,6 @@
           </h3>
         </div>
       </div>
-
       <!-- Main Content -->
       <div class="w-full md:w-9/12 mx-2 h-64">
         {% if driver_profile %}
@@ -79,7 +76,7 @@
               </div>
               <div>
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Experience (years)</label>
-                <input type="number" name="experience_years" value="{{ driver_profile.experience_years }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
+                <input type="number" name="experience_years" value="{{ driver_profile.experience }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
               </div>
               <div>
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">License Number</label>
@@ -91,7 +88,7 @@
               </div>
               <div>
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">License Expiration</label>
-                <input type="date" name="license_expiration" value="{{ driver_profile.license_expiration }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
+                <input type="date" name="license_expiration" value="{{ driver_profile.license_expiration|date:'Y-m-d' }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
               </div>
               <div>
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Salary</label>
@@ -166,6 +163,77 @@
     </div>
   </div>
 </div>
-<!-- Flowbite JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+ {% if driver_profile %}
+<!-- Jobs Applied to Table -->
+        <div class="bg-white dark:bg-gray-800 p-3 ml-6 mt-5 shadow-sm rounded-sm">
+          <div
+            class="flex items-center space-x-2 font-semibold text-gray-900 dark:text-gray-100 leading-8 ml-6"
+          >
+            <span class="tracking-wide">Jobs Applied To</span>
+          </div>
+          <table class="min-w-full leading-normal">
+            <thead>
+              <tr>
+                <th class="px-5 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Job Title</th>
+                <th class="px-5 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Application Date</th>
+                <th class="px-5 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Status</th>
+                <th class="px-5 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Motivation Letter</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for application in applications %}
+              <tr class="dark:text-white text-black">
+                <td class="px-5 py-5 border-b border-gray-200 dark:border-gray-700">{{ application.job.title }}</td>
+                <td class="px-5 py-5 border-b border-gray-200 dark:border-gray-700">{{ application.application_date }}</td>
+                <td class="px-5 py-5 border-b border-gray-200 dark:border-gray-700">{{ application.status }}</td>
+                <td class="px-5 py-5 border-b border-gray-200 dark:border-gray-700">{{ application.motivation_letter|slice:":100" }}{% if application.motivation_letter|length > 100 %}...{% endif %}</td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="4" class="px-5 py-5 border-b border-gray-200 dark:border-gray-700 text-center">No applications found.</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        {% elif company_profile %}
+
+        <!-- Jobs Created Table -->
+        <div class="bg-white dark:bg-gray-800 p-3 mt-5 ml-6 shadow-sm rounded-sm">
+          <div
+            class="flex items-center space-x-2 ml-6 font-semibold text-gray-900 dark:text-gray-100 leading-8"
+          >
+            <span class="tracking-wide">Jobs Created</span>
+          </div>
+          <table class="min-w-full leading-normal">
+            <thead>
+              <tr>
+                <th class="px-5 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Job Title</th>
+                <th class="px-5 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Location</th>
+                <th class="px-5 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Type</th>
+                <th class="px-5 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Status</th>
+                <th class="px-5 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Created At</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for job in jobs_created %}
+              <tr class="text-dark dark:text-white">
+                <td class="px-5 py-5 border-b border-gray-200 dark:border-gray-700">{{ job.title }}</td>
+                <td class="px-5 py-5 border-b border-gray-200 dark:border-gray-700">{{ job.location }}</td>
+                <td class="px-5 py-5 border-b border-gray-200 dark:border-gray-700">{{ job.get_type_display }}</td>
+                <td class="px-5 py-5 border-b border-gray-200 dark:border-gray-700">{{ job.get_status_display }}</td>
+                <td class="px-5 py-5 border-b border-gray-200 dark:border-gray-700">{{ job.created_at }}</td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="5" class="text-dark dark:text-white px-5 py-5 border-b border-gray-200 dark:border-gray-700 text-center">No jobs created.</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% endif %}
+      </div>
+    </div>
 {% endblock %}

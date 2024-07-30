@@ -16,12 +16,12 @@ class Driver(models.Model):
     category = models.CharField(max_length=100, null=True)
     bio = models.TextField(null=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default=AVAILABLE)
-    experience = models.IntegerField(null=True, blank=True)  # Number of years of experience
+    experience = models.IntegerField(null=True, blank=True)  
     license_number = models.CharField(max_length=50, null=True, blank=True)
     license_type = models.CharField(max_length=50, null=True, blank=True)
     license_expiration = models.DateField(null=True, blank=True)
     salary = models.DecimalField(max_digits=10, decimal_places=2,default=0.0)
-    rating = models.FloatField(default=0)  # Average rating
+    rating = models.FloatField(default=0)  
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
