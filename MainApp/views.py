@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login,logout,authenticate
@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 from .models import *
 from django.core.exceptions import ValidationError
 from django.utils.dateparse import parse_date
+
 
 
 # Create your views here.
@@ -154,6 +155,13 @@ class ProfileView(LoginRequiredMixin, View):
 
         return redirect('/profile')
 
+def update_job_status(request, job_id):
+    job = get_object_or_404(Job, id=job_id)
+    if request.method == 'POST':
+        new_status = request.POST.get('status')
+        job.status = new_status
+        job.save()
+        return redirect('/profile') 
 
 class Login(View):
     def get(self,request):

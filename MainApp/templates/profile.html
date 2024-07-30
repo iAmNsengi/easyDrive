@@ -134,23 +134,27 @@
               </div>
               <div>
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Company Name</label>
-                <input type="text" name="name" value="{{ company_profile.name }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
-              </div>
-              <div>
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Location</label>
-                <input type="text" name="location" value="{{ company_profile.location }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
+                <input type="text" name="company_name" value="{{ company_profile.company_name }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
               </div>
               <div>
                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Bio</label>
                 <textarea name="bio" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100">{{ company_profile.bio }}</textarea>
               </div>
               <div>
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Contact Email</label>
-                <input type="email" name="contact_email" value="{{ company_profile.contact_email }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Location</label>
+                <input type="text" name="location" value="{{ company_profile.location }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
               </div>
               <div>
-                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Contact Phone</label>
-                <input type="text" name="contact_phone" value="{{ company_profile.contact_phone }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Website</label>
+                <input type="url" name="website" value="{{ company_profile.website }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Industry</label>
+                <input type="text" name="industry" value="{{ company_profile.industry }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Founded Year</label>
+                <input type="number" name="founded_year" value="{{ company_profile.founded_year }}" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
               </div>
             </div>
             <div class="mt-4">
@@ -163,77 +167,86 @@
     </div>
   </div>
 </div>
- {% if driver_profile %}
+
+{% if driver_profile %}
 <!-- Jobs Applied to Table -->
-        <div class="bg-white dark:bg-gray-800 p-3 ml-6 mt-5 shadow-sm rounded-sm">
-          <div
-            class="flex items-center space-x-2 font-semibold text-gray-900 dark:text-gray-100 leading-8 ml-6"
-          >
-            <span class="tracking-wide">Jobs Applied To</span>
-          </div>
-          <table class="min-w-full leading-normal">
-            <thead>
-              <tr>
-                <th class="px-5 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Job Title</th>
-                <th class="px-5 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Application Date</th>
-                <th class="px-5 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Status</th>
-                <th class="px-5 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Motivation Letter</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for application in applications %}
-              <tr class="dark:text-white text-black">
-                <td class="px-5 py-5 border-b border-gray-200 dark:border-gray-700">{{ application.job.title }}</td>
-                <td class="px-5 py-5 border-b border-gray-200 dark:border-gray-700">{{ application.application_date }}</td>
-                <td class="px-5 py-5 border-b border-gray-200 dark:border-gray-700">{{ application.status }}</td>
-                <td class="px-5 py-5 border-b border-gray-200 dark:border-gray-700">{{ application.motivation_letter|slice:":100" }}{% if application.motivation_letter|length > 100 %}...{% endif %}</td>
-              </tr>
-              {% empty %}
-              <tr>
-                <td colspan="4" class="px-5 py-5 border-b border-gray-200 dark:border-gray-700 text-center">No applications found.</td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
+<div class="bg-white dark:bg-gray-800 p-3 ml-6 mt-5 shadow-sm rounded-sm">
+  <div class="flex items-center space-x-2 font-semibold text-gray-900 dark:text-gray-100 leading-8 ml-6">
+    <span class="tracking-wide">Jobs Applied To</span>
+  </div>
+  <table class="min-w-full leading-normal">
+    <thead>
+      <tr>
+        <th class="px-5 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Job Title</th>
+        <th class="px-5 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Application Date</th>
+        <th class="px-5 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Status</th>
+        <th class="px-5 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Motivation Letter</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for application in applications %}
+      <tr class="dark:text-white text-black">
+        <td class="px-5 py-5 border-b border-gray-200 dark:border-gray-700">{{ application.job.title }}</td>
+        <td class="px-5 py-5 border-b border-gray-200 dark:border-gray-700">{{ application.application_date }}</td>
+        <td class="px-5 py-5 border-b border-gray-200 dark:border-gray-700">{{ application.status }}</td>
+        <td class="px-5 py-5 border-b border-gray-200 dark:border-gray-700">{{ application.motivation_letter|slice:":100" }}{% if application.motivation_letter|length > 100 %}...{% endif %}</td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="4" class="px-5 py-5 border-b border-gray-200 dark:border-gray-700 text-center">No applications found.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 
-        {% elif company_profile %}
+{% elif company_profile %}
+<!-- Jobs Created Table -->
+<div class="bg-white dark:bg-gray-800 p-3 mt-5  shadow-sm rounded-sm">
+  <div class="flex items-center space-x-2  font-semibold text-gray-900 dark:text-gray-100 leading-8">
+    <span class="tracking-wide">Jobs Created</span>
+  </div>
+  <table class="min-w-full leading-normal">
+    <thead>
+      <tr>
+        <th class="px-5 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Job Title</th>
+        <th class="px-5 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Location</th>
+        <th class="px-5 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Type</th>
+        <th class="px-5 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Status</th>
+        <th class="px-5 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Created At</th>
+        <th class="px-5 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for job in jobs_created %}
+      <tr class="text-dark dark:text-white">
+        <td class="px-5 py-5 border-b border-gray-200 dark:border-gray-700">{{ job.title }}</td>
+        <td class="px-5 py-5 border-b border-gray-200 dark:border-gray-700">{{ job.location }}</td>
+        <td class="px-5 py-5 border-b border-gray-200 dark:border-gray-700">{{ job.get_type_display }}</td>
+        <td class="px-5 py-5 border-b border-gray-200 dark:border-gray-700">{{ job.get_status_display }}</td>
+        <td class="px-5 py-5 border-b border-gray-200 dark:border-gray-700">{{ job.created_at }}</td>
+        <td class="px-5 py-5 border-b border-gray-200 dark:border-gray-700">
+          <!-- Update Status Form -->
+          <form method="POST" action="{% url 'update_job_status' job.id %}" class="inline">
+            {% csrf_token %}
+            <select name="status" class="rounded-md border-gray-300 dark:border-gray-600 shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+              <option value="OPEN" {% if job.status == 'OPEN' %}selected{% endif %}>Open</option>
+              <option value="CLOSED" {% if job.status == 'CLOSED' %}selected{% endif %}>Closed</option>
+              <!-- Add more statuses if needed -->
+            </select>
+            <br>
+            <button type="submit" class="px-2 py-1 bg-blue-500 text-white rounded-md">Update Status</button>
+          </form>
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="6" class="px-5 py-5 border-b border-gray-200 dark:border-gray-700 text-center">No jobs created yet.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
 
-        <!-- Jobs Created Table -->
-        <div class="bg-white dark:bg-gray-800 p-3 mt-5 ml-6 shadow-sm rounded-sm">
-          <div
-            class="flex items-center space-x-2 ml-6 font-semibold text-gray-900 dark:text-gray-100 leading-8"
-          >
-            <span class="tracking-wide">Jobs Created</span>
-          </div>
-          <table class="min-w-full leading-normal">
-            <thead>
-              <tr>
-                <th class="px-5 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Job Title</th>
-                <th class="px-5 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Location</th>
-                <th class="px-5 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Type</th>
-                <th class="px-5 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Status</th>
-                <th class="px-5 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 text-left text-xs font-semibold uppercase tracking-wider">Created At</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for job in jobs_created %}
-              <tr class="text-dark dark:text-white">
-                <td class="px-5 py-5 border-b border-gray-200 dark:border-gray-700">{{ job.title }}</td>
-                <td class="px-5 py-5 border-b border-gray-200 dark:border-gray-700">{{ job.location }}</td>
-                <td class="px-5 py-5 border-b border-gray-200 dark:border-gray-700">{{ job.get_type_display }}</td>
-                <td class="px-5 py-5 border-b border-gray-200 dark:border-gray-700">{{ job.get_status_display }}</td>
-                <td class="px-5 py-5 border-b border-gray-200 dark:border-gray-700">{{ job.created_at }}</td>
-              </tr>
-              {% empty %}
-              <tr>
-                <td colspan="5" class="text-dark dark:text-white px-5 py-5 border-b border-gray-200 dark:border-gray-700 text-center">No jobs created.</td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-        {% endif %}
-      </div>
-    </div>
 {% endblock %}
