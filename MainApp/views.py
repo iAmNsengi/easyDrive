@@ -85,9 +85,51 @@ class JobDetail(LoginRequiredMixin,View):
         return redirect(f'/job/{id}')
 
 
-class DriverProfile(LoginRequiredMixin,View):
-    def get(self,request):
-        return render(request,'driver_profile.html')
+class ProfileView(LoginRequiredMixin, View):
+    def get(self, request):
+        user = request.user
+        driver_profile = Driver.objects.filter(user=user).first()
+        company_profile = Company.objects.filter(user=user).first()
+        
+        context = {
+            'driver_profile': driver_profile,
+            'company_profile': company_profile
+        }
+        return render(request, 'profile.html', context)
+
+    def post(self, request):
+        user = request.user
+
+        user.first_name = request.POST.get('first_name')
+        user.last_name = request.POST.get('last_name')
+        user.email = request.POST.get('email')
+        user.save()
+        
+        driver_profile = Driver.objects.filter(user=user).first()
+        if driver_profile:
+            driver_profile.avatar = request.FILES.get('avatar', driver_profile.avatar)
+            driver_profile.category = request.POST.get('category')
+            driver_profile.bio = request.POST.get('bio')
+            driver_profile.status = request.POST.get('status')
+            driver_profile.experience_years = request.POST.get('experience_years')
+            driver_profile.license_number = request.POST.get('license_number')
+            driver_profile.license_type = request.POST.get('license_type')
+            driver_profile.license_expiration = request.POST.get('license_expiration')
+            driver_profile.salary = request.POST.get('salary')
+            driver_profile.rating = request.POST.get('rating')
+            driver_profile.save()
+        else:
+            company_profile = Company.objects.filter(user=user).first()
+            if company_profile:
+                company_profile.avatar = request.FILES.get('avatar', company_profile.avatar)
+                company_profile.name = request.POST.get('name')
+                company_profile.location = request.POST.get('location')
+                company_profile.bio = request.POST.get('bio')
+                company_profile.contact_email = request.POST.get('contact_email')
+                company_profile.contact_phone = request.POST.get('contact_phone')
+                company_profile.save()
+
+        return redirect('profile')
 
 class Login(View):
     def get(self,request):
