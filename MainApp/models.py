@@ -86,10 +86,20 @@ class Job(models.Model):
         ordering = ['-created_at']
 
 class Application(models.Model):
+    PENDING = 'pending'
+    ACCEPTED = 'accepted'
+    REJECTED = 'rejected'
+
+    STATUS_CHOICES = [
+        (PENDING, 'pending'),
+        (ACCEPTED, 'accepted'),
+        (REJECTED, 'rejected'),
+
+    ]
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
     driver = models.ForeignKey(Driver, on_delete=models.CASCADE)
     application_date = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=20, default='pending')
+    status = models.CharField(max_length=20,choices=STATUS_CHOICES, default=PENDING)
     motivation_letter = models.TextField(default="")
 
     def __str__(self):
